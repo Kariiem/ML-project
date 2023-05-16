@@ -34,7 +34,7 @@ def csv_to_tensor(df):
     # convert csv to tensor
     X = df.agg(utils.transform_dataset) # utils.transform_dataset is a dicitionary which applies a transforming function on each column
     y= X["Body_Level"]
-    y= y-1
+    # y= y-1
     X = X.drop("Body_Level", axis=1)
     X["BMI"] = X["Weight"].astype(float) / (X["Height"] ** 2).astype(float)
     X_tensor = torch.from_numpy(X.values).float()
@@ -61,6 +61,22 @@ if __name__ == '__main__':
     print("Accuracy: ", (predicted == y_tensor).sum().item() / len(y_tensor))
     # print F1
     print('F1 score of the network on the test data: %.3f' % (f1_score(y_tensor, predicted, average='macro')))
+
+    # loop over X_tensor and print answers one by one
+    y_numpy = y_tensor.numpy()
+    true_count = 0
+    for i in range(len(X_tensor)):
+        with torch.no_grad():
+            output = net(X_tensor[i])
+            _, predicted = torch.max(output.data, 0)
+        # print("The predicted body level is: ", predicted.item()+1)
+        predicted_numpy = predicted.numpy()
+        if (i==1000):
+            print("The predicted body level is: ", predicted_numpy)
+            print("The actual body level is: ", y_numpy[i])
+
+
+
 
 
 
