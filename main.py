@@ -1,7 +1,7 @@
 import pickle
 import argparse
 import pandas as pd
-from utils import load_model
+from utils import load_model, prepare_data
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -20,8 +20,14 @@ if __name__ == '__main__':
     test_path = args.test_path
     testdata = pd.read_csv(test_path)
 
+    # Preprocess the data
+    testdata = prepare_data(testdata)
+
     # predict and save them to preds.txt
     predictions = model.predict(testdata)
+
+    
+
     with open("preds.txt", "w") as fp:
         fp.writelines('%s\n' % '\t'.join(class_out) for class_out in predictions)
 
