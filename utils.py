@@ -59,6 +59,27 @@ def load_model(model_path):
 
     return model
 
+def prepare_data(train):
+    X = train.agg(
+    transform_dataset
+    )  # utils.transform_dataset is a dicitionary which applies a transforming function on each column
+
+
+    X["Is_Int"] = 0
+
+    X["Is_Int"] = (
+        (abs(round(X["Veg_Consump"]) - X["Veg_Consump"]) < 0.01).astype(int)
+        + (abs(round(X["Water_Consump"]) - X["Water_Consump"]) < 0.01).astype(int)
+        + (abs(round(X["Phys_Act"]) - X["Phys_Act"]) < 0.01).astype(int)
+        + (abs(round(X["Time_E_Dev"]) - X["Time_E_Dev"]) < 0.01).astype(int)
+        + (abs(round(X["Age"]) - X["Age"]) < 0.01).astype(int)
+        + (abs(round(X["Meal_Count"]) - X["Meal_Count"]) < 0.01).astype(int)
+    )
+
+    X["BMI"] = X["Weight"].astype(float) / (X["Height"] ** 2).astype(float)
+
+    return X
+
 transform_dataset_round = {
     "Gender": lambda x: int(x == "Male"),
     "Age": lambda x: round(x),
