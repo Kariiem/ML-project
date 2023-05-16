@@ -1,3 +1,5 @@
+import pickle
+
 Alcohol_str_to_int = {
     "no": 0,
     "Sometimes": 1,
@@ -18,14 +20,14 @@ Transport_str_to_int = {
     "Walking": 4,
 }
 Body_Level_str_to_int = {
-    "Body Level 1": 1,
-    "Body Level 2": 2,
-    "Body Level 3": 3,
-    "Body Level 4": 4,
+    "Body Level 1": 0,
+    "Body Level 2": 1,
+    "Body Level 3": 2,
+    "Body Level 4": 3,
 }
 transform_dataset = {
     "Gender": lambda x: int(x == "Male"),
-    "Age": lambda x: x,
+    "Age": lambda x: round(x),
     "Height": lambda x: x,
     "Weight": lambda x: x,
     "H_Cal_Consump": lambda x: int(x == "yes"),
@@ -42,6 +44,20 @@ transform_dataset = {
     "Transport": lambda x: Transport_str_to_int[x],
     "Body_Level": lambda x: Body_Level_str_to_int[x],
 }
+
+
+def save_model(model):
+    model_name = model.__class__.__name__
+    with open(f"{model_name}.pkl", "wb") as f:
+        pickle.dump(model, f)
+
+
+def load_model(model_path):
+    model = None
+    with open(model_path, "rb") as f:
+        model = pickle.load(f)
+
+    return model
 
 transform_dataset_round = {
     "Gender": lambda x: int(x == "Male"),

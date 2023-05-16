@@ -1,0 +1,60 @@
+svm: kernel=rbf, C=1.0, gamma='scale'
+              precision    recall  f1-score   support
+
+           1       0.89      0.97      0.93        40
+           2       0.84      0.86      0.85        37
+           3       0.70      0.89      0.78        65
+           4       0.98      0.83      0.90       151
+
+    accuracy                           0.87       293
+   macro avg       0.85      0.89      0.87       293
+weighted avg       0.89      0.87      0.87       293
+
+svm_clf||                Bias:  0.12878839590443683 Variance:  0.12627986348122866 Error:  0.011075085324232082 
+
+
+random forest: n_estimators=100, max_depth=None
+              precision    recall  f1-score   support
+
+           1       1.00      0.97      0.99        40
+           2       0.93      1.00      0.96        37
+           3       0.98      0.95      0.97        65
+           4       0.99      0.99      0.99       151
+
+    accuracy                           0.98       293
+   macro avg       0.98      0.98      0.98       293
+weighted avg       0.98      0.98      0.98       293
+
+random_forest_clf||      Bias:  0.017440273037542663 Variance:  0.017064846416382253 Error:  0.006655290102389078 
+
+
+naive bayes: GaussianNB
+              precision    recall  f1-score   support
+
+           1       0.93      0.93      0.93        40
+           2       0.77      0.89      0.82        37
+           3       0.86      0.66      0.75        65
+           4       0.90      0.95      0.93       151
+
+    accuracy                           0.88       293
+   macro avg       0.86      0.86      0.86       293
+weighted avg       0.88      0.88      0.87       293
+
+naive_bayes_clf||        Bias:  0.15909556313993173 Variance:  0.13993174061433447 Error:  0.05530716723549488 
+
+
+svm: kernel=linear C=10 gamma=0.01
+              precision    recall  f1-score   support
+
+           1       0.97      0.95      0.96        40
+           2       0.90      0.95      0.92        37
+           3       0.95      0.94      0.95        65
+           4       0.99      0.99      0.99       151
+
+    accuracy                           0.97       293
+   macro avg       0.95      0.96      0.95       293
+weighted avg       0.97      0.97      0.97       293
+
+svm_clf||                Bias:  0.027047781569965873 Variance:  0.020477815699658702 Error:  0.01414675767918089 
+
+
