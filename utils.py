@@ -44,6 +44,24 @@ transform_dataset = {
     "Transport": lambda x: Transport_str_to_int[x],
     "Body_Level": lambda x: Body_Level_str_to_int[x],
 }
+transform_datasetX = {
+    "Gender": lambda x: int(x == "Male"),
+    "Age": lambda x: round(x),
+    "Height": lambda x: x,
+    "Weight": lambda x: x,
+    "H_Cal_Consump": lambda x: int(x == "yes"),
+    "Veg_Consump": lambda x: x,
+    "Water_Consump": lambda x: x,
+    "Alcohol_Consump": lambda x: Alcohol_str_to_int[x],
+    "Smoking": lambda x: int(x == "yes"),
+    "Meal_Count": lambda x: x,
+    "Food_Between_Meals": lambda x: Food_between_Meals_str_to_int[x],
+    "Fam_Hist": lambda x: int(x == "yes"),
+    "H_Cal_Burn": lambda x: int(x == "yes"),
+    "Phys_Act": lambda x: x,
+    "Time_E_Dev": lambda x: x,
+    "Transport": lambda x: Transport_str_to_int[x],
+}
 
 
 def save_model(model):
@@ -62,6 +80,10 @@ def load_model(model_path):
 def prepare_data(train):
     X = train.agg(
     transform_dataset
+    )  # utils.transform_dataset is a dicitionary which applies a transforming function on each column
+def prepare_dataX(train):
+    X = train.agg(
+    transform_datasetX
     )  # utils.transform_dataset is a dicitionary which applies a transforming function on each column
 
 
