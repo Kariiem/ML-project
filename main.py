@@ -6,9 +6,9 @@ from utils import load_model, prepare_dataX
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "model_path", help="Model pkl file path you wish to use", type=str)
+        "--model_path", help="Model pkl file path you wish to use", type=str)
     parser.add_argument(
-        "test_path", help="Data file path you wish to use for testing", type=str)
+        "--test_path", help="Data file path you wish to use for testing", type=str)
 
     args = parser.parse_args()
 
@@ -25,11 +25,24 @@ if __name__ == '__main__':
 
     # predict and save them to preds.txt
     predictions = model.predict(testdata)
+    Body_Level_str_to_int = {
+    "Body Level 1": 0,
+    "Body Level 2": 1,
+    "Body Level 3": 2,
+    "Body Level 4": 3,
+    }
+    # int to str dict
+    Body_Level_int_to_str = {
+    0: "Body Level 1",
+    1: "Body Level 2",
+    2: "Body Level 3",
+    3: "Body Level 4"
+    }
 
     # print(predictions)
     # for i in range(len(predictions)):
     #     print(predictions[i])
     with open("preds.txt", "w") as fp:
-        fp.writelines('%s\n' % class_out for class_out in predictions)
+        fp.writelines('%s\n' % Body_Level_int_to_str[class_out] for class_out in predictions)
         # fp.writelines('%s\n' % '' for class_out in predictions)
 
