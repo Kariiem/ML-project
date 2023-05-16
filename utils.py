@@ -1,3 +1,5 @@
+import pickle
+
 Alcohol_str_to_int = {
     "no": 0,
     "Sometimes": 1,
@@ -42,3 +44,15 @@ transform_dataset = {
     "Transport": lambda x: Transport_str_to_int[x],
     "Body_Level": lambda x: Body_Level_str_to_int[x],
 }
+
+def save_model(model):
+    model_name = model.__class__.__name__
+    with open(f"{model_name}.pkl", "wb") as f:
+        pickle.dump(model, f)
+
+def load_model(model_path):
+    model = None
+    with open(model_path, "rb") as f:
+        model = pickle.load(f)
+
+    return model
