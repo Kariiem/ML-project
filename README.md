@@ -35,13 +35,15 @@ This project analyzes the data of human body-level classification. The data is c
 
 We tried different concepts of the machine learning course on this data and compared the results to find the best model. It is important to note that this project was also a competition between the students of the course. The competition was based on the weighted f1-score of the model on the test set. The test set was not provided to us, so we had to submit our chosen model as a script to be tested by the TA.
 
+<br>
+
 Fortunately, we were able to achieve the **highest score in the competition and get the 1st place**. The final f1-score of our model on the test data was **0.998**.
 
 ## Data Exploration
 
 We used Tableau and also Python Matplotlib and Seaborn libraries to visualize the data and explore it throughout the project.
 
-
+<br>
 
 <div align="center">
 <img src="image/README/1686341018273.png" alt="1686341018273" style="height:350px;" />
@@ -55,7 +57,7 @@ So we decided to round the values of the age variable. The distribution after ro
 
 The fact that some values were float while some others were exact integers was a bit suspicious. We then investigated the remaining variables and found an interesting pattern in the data. Below are 2 examples of the variables that have this pattern:
 
-
+<br>
 
 <div align="center">
 <img src="image/README/1686343669090.png" alt="1686343669090" style="max-Width:800px;" />
@@ -67,11 +69,11 @@ We can see that these variables range from 0 to 4, but with spikes at the intege
 
 However, if data was collected regularly, then it can be argued that the person might have eaten 2.35531314 meals on **average** per day. Even in that case, it is still weird that the distribution is not uniform and has spikes at the integer values. This pattern showed up in at least 6 variables: **Water Consumption, Veg Consumption, Time E Dev, Meal Count, Weight, and Phys Act.** We tried to investigate the correlation between them to see if the non-integer occurrences or lack thereof are correlated.
 
-
+<br>
 
 <div align="center">
-<img src="image/README/1686344194683.png" alt="1686344194683" style="max-Width:800px;" />
-<img src="image/README/1686344251468.png" alt="1686344251468" style="max-Width:800px;" />
+<img src="image/README/1686344194683.png" alt="1686344194683" style="max-Width:700px;" />
+<img src="image/README/1686344251468.png" alt="1686344251468" style="max-Width:700px;" />
 <p>Figure 3: Correlation between the 6 variables</p>
 <p>Left: We can see the combinations of each variable being integer (True) or not (False). Right: a summarized version where we plot only the count of rows having a specific number of variables being integers (0-6)</p>
 </div>
@@ -85,6 +87,7 @@ These Graphs were very interesting for a couple of reasons:
 
 - Following this pattern, we deduce the variables tend to be `float` together (to a lesser extent). For example, the combination of 0 or just 1 variable being integer is high compared to what we would expect if there was no correlation. For example the probability should be ~10% but it is > 25% in the data.
 
+<br>
 
 Based on the patterns shown here and also what we discussed earlier about data collection, we speculate that while collecting this data, values of such columns originally were supposed to be integers, but some of them were missing frequently. These values were then imputed through interpolation or other methods. This is what introduced float values to the columns. Of course, this is just a speculation and we don’t have concrete proof for it. But the strong correlation between existence of float values or lack thereof in the columns is a strong supporting observation.
 
