@@ -41,15 +41,21 @@ Fortunately, we were able to achieve the **highest score in the competition and 
 
 We used Tableau and also Python Matplotlib and Seaborn libraries to visualize the data and explore it throughout the project.
 
+
+
 <div align="center">
 <img src="image/README/1686341018273.png" alt="1686341018273" style="height:350px;" />
 <img src="image/README/1686341396143.png" alt="1686341396143" style="height:350px;" />
 <p>Figure 1: Age Most Frequent Values - Left: Before Rounding, Right: After Rounding</p>
 </div>
 
-We started exploring each variable independently. For Example, we plotted the distribution of the age variable and found that the majority of the data is for people with ages ranging from 18 to 26. We also found that some values didn’t make much sense, like a value of 18.01 for the age variable. Surely, it could mean that the person is 18 and 1/100 of a year old, but it’s not a common way to represent age. So we decided to round the values of the age variable. The distribution after rounding looked much better as shown in Figure 1. This was important because the majority of the data was integer values and we wanted to keep the data consistent.
+We started exploring each variable independently. For Example, we plotted the distribution of the age variable and found that the majority of the data is for ages ranging from 18 to 26. We also found that some values didn’t make much sense, like a value of 18.01 for the age variable. Surely, it could mean that the person is 18 + 1/100 of a year old, but it’s not a common way to represent age.
+
+So we decided to round the values of the age variable. The distribution after rounding looked much better as shown in Figure 1. This was important because the majority of the data was integer values and we wanted to keep the data consistent.
 
 The fact that some values were float while some others were exact integers was a bit suspicious. We then investigated the remaining variables and found an interesting pattern in the data. Below are 2 examples of the variables that have this pattern:
+
+
 
 <div align="center">
 <img src="image/README/1686343669090.png" alt="1686343669090" style="max-Width:800px;" />
@@ -57,7 +63,11 @@ The fact that some values were float while some others were exact integers was a
 <p>Figure 2: Histograms of 2 variables: Water Consumption, Meal Count</p>
 </div>
 
-We can see that these variables range from 0 to 4, but with spikes at the integer values, while the distribution for remaining non-integer values is almost uniform and small in comparison to the integer values. Depending on the collection method, it can be argued if this is a valid pattern or not. Take the Meal Count variable for example, if it is collected once via a form, then surely it wouldn't make sense that people would enter 2.35531314 as a value for example. However, if it is collected regularly (regardless of through a form or some technology), then it can be argued that the person might have eaten 2.35531314 meals on **average** per day. Even in that case, it is still weird that the distribution is not uniform and has spikes at the integer values. This pattern showed up in at least 6 variables: **Water Consumption, Veg Consumption, Time E Dev, Meal Count, Weight, and Phys Act.** We tried to investigate the correlation between them to see if the non-integer occurrences or lack thereof are correlated.
+We can see that these variables range from 0 to 4, but with spikes at the integer values, while the distribution for remaining non-integer values is almost uniform and small in comparison to the integer values. Depending on the collection method, it can be argued if this is a valid pattern or not. Take the Meal Count variable for example, if it is collected once via a form, then surely it wouldn't make sense that people would enter 2.35531314 as a value for example.
+
+However, if data was collected regularly, then it can be argued that the person might have eaten 2.35531314 meals on **average** per day. Even in that case, it is still weird that the distribution is not uniform and has spikes at the integer values. This pattern showed up in at least 6 variables: **Water Consumption, Veg Consumption, Time E Dev, Meal Count, Weight, and Phys Act.** We tried to investigate the correlation between them to see if the non-integer occurrences or lack thereof are correlated.
+
+
 
 <div align="center">
 <img src="image/README/1686344194683.png" alt="1686344194683" style="max-Width:800px;" />
@@ -74,6 +84,7 @@ These Graphs were very interesting for a couple of reasons:
 - The second graph also shows an interesting pattern, if there was no correlation between the variables, then the distribution of the number of variables being integer should be a binomial distribution with `n=6` and `p=0.5`, in other words, we would see a symmetric bell curve centered around 3. However, the curve seems heavily skewed to the left (except for the 6 as discussed above). We can see that values of 0, 1, and 2 are much more frequent than 3, 4, and 5 respectively.
 
 - Following this pattern, we deduce the variables tend to be `float` together (to a lesser extent). For example, the combination of 0 or just 1 variable being integer is high compared to what we would expect if there was no correlation. For example the probability should be ~10% but it is > 25% in the data.
+
 
 Based on the patterns shown here and also what we discussed earlier about data collection, we speculate that while collecting this data, values of such columns originally were supposed to be integers, but some of them were missing frequently. These values were then imputed through interpolation or other methods. This is what introduced float values to the columns. Of course, this is just a speculation and we don’t have concrete proof for it. But the strong correlation between existence of float values or lack thereof in the columns is a strong supporting observation.
 
